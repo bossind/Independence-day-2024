@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Independence Day Celebration</title>
+    <style>
+        body {
+            background: #000019;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        @property --direction {
+            syntax: '<angle>';
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        .lot {
+            position: relative;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            text-transform: capitalize;
+            font-weight: bold;
+            background: black;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 40px;
+        }
+
+        .lot::after, .lot::before {
+            content: '';
+            background: conic-gradient(from var(--direction), transparent 30%, #6500ff, #00ffea, #00ff6c, #f800ff);
+            position: absolute;
+            left: -2px;
+            bottom: -2px;
+            width: 104%;
+            height: 111%;
+            border-radius: 5px;
+            z-index: -1;
+            animation: rotate 2s linear infinite;
+        }
+
+        .lot::before {
+            filter: blur(15px);
+        }
+
+        @keyframes rotate {
+            from {
+                --direction: 0deg;
+            }
+            to {
+                --direction: 360deg;
+            }
+        }
+
+        .lot:hover {
+            background: linear-gradient(45deg, crimson, blue);
+        }
+
+        .flag {
+            width: 300px;
+            height: auto;
+            margin: 20px;
+            animation: wave 2s infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .play-button {
+            position: relative;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            text-transform: capitalize;
+            font-weight: bold;
+            background: black;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px;
+            cursor: pointer;
+            overflow: hidden;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .play-button::after, .play-button::before {
+            content: '';
+            background: conic-gradient(from var(--direction), transparent 30%, #6500ff, #00ffea, #00ff6c, #f800ff);
+            position: absolute;
+            left: -2px;
+            bottom: -2px;
+            width: 104%;
+            height: 111%;
+            border-radius: 5px;
+            z-index: -1;
+            animation: rotate 2s linear infinite;
+        }
+
+        .play-button::before {
+            filter: blur(15px);
+        }
+
+        audio {
+            display: none; /* Hide the audio player */
+        }
+    </style>
+</head>
+<body>
+    <div class="lot">
+        Independence Day 2024
+    </div>
+    <img class="flag" src="https://i.imgur.com/2uAm3DE.png" alt="Indian Flag">
+    <div class="lot">
+        न सिर झुका है कभी<br>
+        और न झुकने देंगे कभी,<br>
+        जो अपने दम पर जिएं<br>
+        सच में जिंदगी है वही<br>
+        स्‍वतंत्रता दिवस की हार्दिक शुभकामनाएं
+    </div>
+    <div class="lot">
+        बाबा हरदेव सिंह हायर सेकेंडरी मोरादाबाद
+    </div>
+    <button class="play-button" onclick="document.getElementById('audio').play()">Play Song</button>
+    <audio id="audio" preload="auto">
+        <source src="https://firebasestorage.googleapis.com/v0/b/song-url-43c0e.appspot.com/o/audio%2FY2meta.app%20-%20Teri%20Mitti%20Female%20Version%20-%20Kesari%20_%20Arko%20feat.%20Parineeti%20Chopra%20_%20Akshay%20Kumar%20_%20Manoj%20Muntashir%20(128%20kbps)%20(mp3cut.net).mp3?alt=media&token=de5ece41-c351-4497-b66f-17fb9053a2a2" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</body>
+</html>
