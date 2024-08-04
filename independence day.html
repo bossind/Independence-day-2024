@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Independence Day 2024</title>
+    <style>
+        body {
+            background: #000019;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+        }
+
+        @property --direction {
+            syntax: '<angle>';
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        .header, .name-display, .shayari {
+            position: relative;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+            text-transform: capitalize;
+            font-weight: bold;
+            background: black;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 40px;
+            text-align: center;
+        }
+
+        .header::after, .header::before, .name-display::after, .name-display::before, .shayari::after, .shayari::before {
+            content: '';
+            background: conic-gradient(from var(--direction), transparent 30%, #6500ff, #00ffea, #00ff6c, #f800ff);
+            position: absolute;
+            left: -2px;
+            bottom: -2px;
+            width: 104%;
+            height: 111%;
+            border-radius: 5px;
+            z-index: -1;
+            animation: rotate 2s linear infinite;
+        }
+
+        .header::before, .name-display::before, .shayari::before {
+            filter: blur(15px);
+        }
+
+        @keyframes rotate {
+            from {
+                --direction: 0deg;
+            }
+            to {
+                --direction: 360deg;
+            }
+        }
+
+        .header:hover, .name-display:hover, .shayari:hover {
+            background: linear-gradient(45deg, crimson, blue);
+        }
+
+        .audio-button {
+            padding: 10px 20px;
+            background: black;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .audio-button:hover {
+            background: linear-gradient(45deg, crimson, blue);
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .input-container input, .input-container select, .input-container button {
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .input-container button {
+            background: black;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .input-container button:hover {
+            background: linear-gradient(45deg, crimson, blue);
+        }
+
+        .edit-button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        footer a {
+            color: #00ffea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .share-buttons button {
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .share-buttons button:hover {
+            background: linear-gradient(45deg, crimson, blue);
+        }
+
+        .share-buttons a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="schoolName">बाबा हरदेव सिंह उच्चतर माध्यमिक विद्यालय, मुरादाबाद</div>
+    <div class="header">Independence Day 2024</div>
+    <img src="https://i.imgur.com/2uAm3DE.png" alt="Indian Flag" style="width: 300px; height: auto;">
+    <div class="input-container" id="inputContainer">
+        <input type="text" id="nameInput" placeholder="Enter your name">
+        <select id="roleSelect">
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
+        </select>
+        <button class="add-button" onclick="addName()">Set Name</button>
+    </div>
+    <div class="name-display" id="nameDisplay" style="display:none;">
+        <span id="nameRoleText"></span>
+        <button class="edit-button" onclick="editName()">✏️</button>
+    </div>
+    <div class="shayari" id="shayari" style="display:none;">
+        न सिर झुका है कभी और न झुकने देंगे कभी,<br>
+        जो अपने दम पर जिएं सच में जिंदगी है वही<br>
+        स्वतंत्रता दिवस की हार्दिक शुभकामनाएं
+    </div>
+    <audio id="audio" src="https://firebasestorage.googleapis.com/v0/b/song-url-43c0e.appspot.com/o/audio%2FY2meta.app%20-%20Teri%20Mitti%20Female%20Version%20-%20Kesari%20_%20Arko%20feat.%20Parineeti%20Chopra%20_%20Akshay%20Kumar%20_%20Manoj%20Muntashir%20(128%20kbps)%20(mp3cut.net).mp3?alt=media&token=de5ece41-c351-4497-b66f-17fb9053a2a2"></audio>
+    <button class="audio-button" onclick="toggleAudio()">Play Audio</button>
+
+    <div class="share-buttons" id="shareButtons" style="display:none;">
+        <button onclick="share('whatsapp')"><a id="whatsappShare" href="#">WhatsApp</a></button>
+        <button onclick="share('telegram')"><a id="telegramShare" href="#">Telegram</a></button>
+        <button onclick="share('instagram')"><a id="instagramShare" href="#">Instagram</a></button>
+        <button onclick="share('facebook')"><a id="facebookShare" href="#">Facebook</a></button>
+        <button onclick="share('more')"><a id="moreShare" href="#">More</a></button>
+    </div>
+    
+    <footer>
+        Design By Ritik Rai | <a href="https://hindustaniparivar.in" target="_blank">Hindustani Parivar</a>
+    </footer>
+    
+    <script>
+        function addName() {
+            const name = document.getElementById('nameInput').value;
+            const role = document.getElementById('roleSelect').value;
+            let nameRoleText = '';
+
+            if (role === 'teacher') {
+                nameRoleText = `${name}, हम अध्यापक की और बच्चों और भारतीयों को स्वतंत्रता दिवस की शुभकामनाएं`;
+            } else {
+                nameRoleText = `${name}, हम विद्यार्थी की ओर से अध्यापक और भारतीयों को स्वतंत्रता दिवस की शुभकमनाएं`;
+            }
+
+            document.getElementById('nameRoleText').innerText = nameRoleText;
+            document.getElementById('inputContainer').style.display = 'none';
+            document.getElementById('nameDisplay').style.display = 'block';
+            document.getElementById('shayari').style.display = 'block';
+            document.getElementById('shareButtons').style.display = 'flex';
+
+            updateShareLinks(nameRoleText);
+        }
+
+        function editName() {
+            document.getElementById('inputContainer').style.display = 'flex';
+            document.getElementById('nameDisplay').style.display = 'none';
+            document.getElementById('shayari').style.display = 'none';
+            document.getElementById('shareButtons').style.display = 'none';
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('audio');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        function updateShareLinks(text) {
+            const encodedText = encodeURIComponent(text + '\n\n' + 'स्वतंत्रता दिवस की शुभकामनाएं!\nhttps://hindustaniparivar.in');
+            document.getElementById('whatsappShare').href = `https://api.whatsapp.com/send?text=${encodedText}`;
+            document.getElementById('telegramShare').href = `https://t.me/share/url?url=https://hindustaniparivar.in&text=${encodedText}`;
+            document.getElementById('instagramShare').href = `https://www.instagram.com/direct/new/?text=${encodedText}`;
+            document.getElementById('facebookShare').href = `https://www.facebook.com/sharer/sharer.php?u=https://hindustaniparivar.in&quote=${encodedText}`;
+            document.getElementById('moreShare').href = `mailto:?subject=स्वतंत्रता दिवस की शुभकामनाएं&body=${encodedText}`;
+        }
+
+        function share(platform) {
+            const nameRoleText = document.getElementById('nameRoleText').innerText;
+            updateShareLinks(nameRoleText);
+
+            switch (platform) {
+                case 'whatsapp':
+                    document.getElementById('whatsappShare').click();
+                    break;
+                case 'telegram':
+                    document.getElementById('telegramShare').click();
+                    break;
+                case 'instagram':
+                    document.getElementById('instagramShare').click();
+                    break;
+                case 'facebook':
+                    document.getElementById('facebookShare').click();
+                    break;
+                case 'more':
+                    document.getElementById('moreShare').click();
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
